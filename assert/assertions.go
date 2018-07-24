@@ -137,12 +137,13 @@ func CallerInfo() []string {
 			break
 		}
 
-		parts := strings.Split(file, "/")
+		fullPath := file
+		parts := strings.Split(fullPath, "/")
 		file = parts[len(parts)-1]
 		if len(parts) > 1 {
 			dir := parts[len(parts)-2]
 			if (dir != "assert" && dir != "mock" && dir != "require") || file == "mock_test.go" {
-				callers = append(callers, fmt.Sprintf("%s:%d", file, line))
+				callers = append(callers, fmt.Sprintf("%s:%d", fullPath, line))
 			}
 		}
 
